@@ -17,6 +17,12 @@ export type RootStackParamList = {
     movie: string;
     headerImage: string;
   };
+  /** Jirani's check-in card, shown over everything. */
+  Checkin: {
+    id: string;
+    residentName: string;
+    message: string;
+  };
 };
 
 export type DrawerParamList = {

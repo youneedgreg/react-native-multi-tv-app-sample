@@ -1,0 +1,7 @@
+{
+  "url": "https://<ApiUrl from the Jirani stack outputs>/",
+  "token": "<Jirani API token, from Secrets Manager; never commit it>",
+  "lang": "en",
+  "familyName": "Amina",
+  "pollSeconds": 5
+}

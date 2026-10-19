@@ -3,6 +3,7 @@ import { RootStackParamList } from './types';
 import DrawerNavigator from './DrawerNavigator';
 import DetailsScreen from '../screens/DetailsScreen';
 import PlayerScreen from '../screens/PlayerScreen';
+import CheckinScreen from '../screens/CheckinScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,6 +17,7 @@ export default function RootNavigator() {
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
       <Stack.Screen name="Details" component={DetailsScreen} />
       <Stack.Screen name="Player" component={PlayerScreen} />
+      <Stack.Screen name="Checkin" component={CheckinScreen} options={{ presentation: 'transparentModal', animation: 'fade' }} />
     </Stack.Navigator>
   );
 }

@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 import { MenuProvider } from '../components/MenuContext';
 import { GoBackConfiguration } from '../app/remote-control/GoBackConfiguration';
 import RootNavigator from './RootNavigator';
+import { CheckinProvider, CheckinWatcher } from '../jirani/CheckinWatcher';
 
 export interface AppNavigatorProps {
   fontsLoaded?: boolean;
@@ -36,8 +37,11 @@ export default function AppNavigator({ fontsLoaded = true, onReady }: AppNavigat
     <StrictMode>
       <NavigationContainer theme={DarkTheme}>
         <MenuProvider>
-          <GoBackConfiguration />
-          <RootNavigator />
+          <CheckinProvider>
+            <GoBackConfiguration />
+            <CheckinWatcher />
+            <RootNavigator />
+          </CheckinProvider>
         </MenuProvider>
       </NavigationContainer>
     </StrictMode>
