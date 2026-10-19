@@ -7,6 +7,21 @@ A production-ready TV application template built with React Native, supporting A
 
 ![Demo GIF](./tvdemo.gif)
 
+## Jirani check-in card (added in this fork)
+
+This fork adds one feature to Amazon's sample for [Jirani](https://github.com/youneedgreg/Jirani), a caregiving agent that learns an older adult's routine from Ring sensors and asks her first when the day breaks pattern. When Jirani asks Margaret whether she's OK, her TV shows the question over whatever she's watching, with two large buttons the remote reaches with left/right and OK:
+
+- **I'm OK**: closes the alert.
+- **Call Amina**: closes the alert and asks her family to phone her.
+
+The answer goes to Jirani's MCP server (`tools/call answer_checkin`), the same tool Alexa+ and the voice client use; the card decides nothing itself. It works on every app in this repo: the shared code is in `packages/shared-ui/src/jirani/` and `screens/CheckinScreen.tsx`, wired into both the Expo app and the Vega app. English and Spanish.
+
+Apart from two small hooks (an optional text style on `FocusablePressable`, and the drawers ignoring the remote while the card is up), everything else is Amazon's sample, unchanged.
+
+**Run it against a local Jirani** (in the Jirani repo, `JIRANI_DEMO=1 JIRANI_ALLOWED_HOSTS=10.0.2.2 JIRANI_CORS_ORIGINS=http://localhost:8082 pnpm mcp`, then stage a morning with no activity), and start this app as usual (`yarn dev:web`, `yarn dev:android`, or the Vega build). The card appears within 5 seconds of Jirani asking.
+
+**Settings**: copy `packages/shared-ui/src/jirani/config.local.example.json` to `config.local.json` (git-ignored) to change the Jirani URL, the API token for a deployed Jirani, the language (`"es"`), the family member's name, or the polling interval. Without it, the app talks to a local Jirani (`10.0.2.2` on Android, `localhost` elsewhere). The token is bundled into the app, so use it on an emulator only; a real product would pair each TV with its own token.
+
 ## Table of Contents
 
 - [Features](#features)

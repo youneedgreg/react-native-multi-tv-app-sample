@@ -24,3 +24,6 @@ yarn-error.log
 .DS_Store
 
 
+
+# Jirani: the TV card's API URL and token (see packages/shared-ui/src/jirani/config.ts)
+packages/shared-ui/src/jirani/config.local.json

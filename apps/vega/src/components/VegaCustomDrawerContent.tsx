@@ -5,11 +5,12 @@ import { DefaultFocus, SpatialNavigationFocusableView, SpatialNavigationRoot } f
 import { useNavigation } from '@amazon-devices/react-navigation__native';
 import { DrawerNavigationProp } from '@amazon-devices/react-navigation__drawer';
 import { DrawerParamList } from '../navigation/types';
-import { useMenuContext } from '@multi-tv/shared-ui';
+import { useCheckinShowing, useMenuContext } from '@multi-tv/shared-ui';
 
 export default function VegaCustomDrawerContent(props: any) {
   const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
   const { isOpen: isMenuOpen, toggleMenu } = useMenuContext();
+  const { showing: checkinShowing } = useCheckinShowing();
   const styles = drawerStyles;
 
   const drawerItems = [
@@ -19,7 +20,7 @@ export default function VegaCustomDrawerContent(props: any) {
   ] as const;
 
   return (
-    <SpatialNavigationRoot isActive={isMenuOpen}>
+    <SpatialNavigationRoot isActive={isMenuOpen && !checkinShowing}>
       <View style={styles.drawerContainer}>
         {/* Gradient-like scrim overlay */}
         <View style={styles.scrimOverlay} />

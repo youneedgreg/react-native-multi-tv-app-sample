@@ -8,10 +8,12 @@ import { safeZones, colors } from '../theme';
 import { useCallback } from 'react';
 import { Direction } from '@bam.tech/lrud';
 import { getCloseDrawerDirection } from '../utils/rtl';
+import { useCheckinShowing } from '../jirani/CheckinWatcher';
 
 export default function CustomDrawerContent(props: DrawerContentComponentProps) {
   const navigation = props.navigation;
   const { isOpen: isMenuOpen, toggleMenu } = useMenuContext();
+  const { showing: checkinShowing } = useCheckinShowing();
   const styles = drawerStyles;
   const drawerItems = [
     { name: 'Home', label: 'Home' },
@@ -30,7 +32,7 @@ export default function CustomDrawerContent(props: DrawerContentComponentProps) 
   );
 
   return (
-    <SpatialNavigationRoot isActive={isMenuOpen} onDirectionHandledWithoutMovement={onDirectionHandledWithoutMovement}>
+    <SpatialNavigationRoot isActive={isMenuOpen && !checkinShowing} onDirectionHandledWithoutMovement={onDirectionHandledWithoutMovement}>
       <View style={styles.drawerContainer}>
         {/* Gradient-like scrim overlay */}
         <View style={styles.scrimOverlay} />

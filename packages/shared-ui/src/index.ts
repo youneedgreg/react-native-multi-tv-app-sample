@@ -18,6 +18,10 @@ export { default as PlayerScreen } from './screens/PlayerScreen';
 export { default as ExploreScreen } from './screens/ExploreScreen';
 export { default as TVScreen } from './screens/TVScreen';
 export { default as SettingsScreen } from './screens/SettingsScreen';
+export { default as CheckinScreen } from './screens/CheckinScreen';
+
+// Jirani check-in card
+export { CheckinProvider, CheckinWatcher, useCheckinShowing } from './jirani/CheckinWatcher';
 
 // Utils
 export { VideoHandler } from './utils/VideoHandler';
