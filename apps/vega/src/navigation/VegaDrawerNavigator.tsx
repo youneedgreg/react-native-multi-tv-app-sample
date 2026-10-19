@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@amazon-devices/react-navigation__drawer'
 import { useNavigation, DrawerActions } from '@amazon-devices/react-navigation__native';
 import { SpatialNavigationRoot } from 'react-tv-space-navigation';
 import { Direction } from '@bam.tech/lrud';
-import { useMenuContext, scaledPixels, HomeScreen, ExploreScreen, TVScreen, SettingsScreen } from '@multi-tv/shared-ui';
+import { useCheckinShowing, useMenuContext, scaledPixels, HomeScreen, ExploreScreen, TVScreen, SettingsScreen } from '@multi-tv/shared-ui';
 import VegaCustomDrawerContent from '../components/VegaCustomDrawerContent';
 import { DrawerParamList } from './types';
 
@@ -27,6 +27,7 @@ function DrawerSyncWrapper() {
 export default function VegaDrawerNavigator() {
   const styles = drawerStyles;
   const { isOpen: isMenuOpen, toggleMenu } = useMenuContext();
+  const { showing: checkinShowing } = useCheckinShowing();
   const navigation = useNavigation();
 
   const onDirectionHandledWithoutMovement = useCallback(
@@ -42,7 +43,7 @@ export default function VegaDrawerNavigator() {
   return (
     <View style={{ flex: 1 }}>
       <SpatialNavigationRoot
-        isActive={isMenuOpen}
+        isActive={isMenuOpen && !checkinShowing}
         onDirectionHandledWithoutMovement={onDirectionHandledWithoutMovement}
       >
         <Drawer.Navigator
