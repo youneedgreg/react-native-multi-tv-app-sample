@@ -20,6 +20,18 @@ Apart from two small hooks (an optional text style on `FocusablePressable`, and 
 
 **Run it against a local Jirani** (in the Jirani repo, `JIRANI_DEMO=1 JIRANI_ALLOWED_HOSTS=10.0.2.2 JIRANI_CORS_ORIGINS=http://localhost:8082 pnpm mcp`, then stage a morning with no activity), and start this app as usual (`yarn dev:web`, `yarn dev:android`, or the Vega build). The card appears within 5 seconds of Jirani asking.
 
+**On the Vega Virtual Device** (tested 20 Oct 2026 with Vega CLI 1.4.5 and SDK 0.24.12112 on an Apple-silicon Mac; the CLI is `vega`, which replaces the older `kepler` commands):
+
+```bash
+vega sdk install --non-interactive          # once; about 5 GB
+vega virtual-device start --timeout 300     # boots in about 25 seconds
+yarn build:vega:debug
+vega device start-port-forwarding --port 3333 --forward false   # localhost:3333 on the device reaches Jirani on the Mac
+vega run-app apps/vega/build/aarch64-debug/vega_aarch64.vpkg com.giolaq.multitv.vega.main -d VirtualDevice
+```
+
+On the device, the arrow keys move focus, Enter selects and Esc goes back.
+
 **Settings**: copy `packages/shared-ui/src/jirani/config.local.example.json` to `config.local.json` (git-ignored) to change the Jirani URL, the API token for a deployed Jirani, the language (`"es"`), the family member's name, or the polling interval. Without it, the app talks to a local Jirani (`10.0.2.2` on Android, `localhost` elsewhere). The token is bundled into the app, so use it on an emulator only; a real product would pair each TV with its own token.
 
 ## Table of Contents
@@ -499,7 +511,7 @@ Contributions are welcome! This project is an open-source sample designed to hel
 **Vega SDK Not Found**
 
 - Ensure Vega SDK is installed and in PATH
-- Check SDK path: `echo $KEPLER_SDK_HOME`
+- Check the SDK: `vega sdk list-installed`, and `echo $KEPLER_SDK_PATH` (set in `~/vega/env`; if `vega sdk install` ran after the CLI was installed, the variable may be missing and has to be added by hand)
 - Download from: [Amazon Vega Developer Portal](https://developer.amazon.com/vega)
 
 ### Web Platform Issues
